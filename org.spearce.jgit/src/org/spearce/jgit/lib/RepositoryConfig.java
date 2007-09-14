@@ -211,9 +211,13 @@ public class RepositoryConfig {
 			ok = true;
 		} finally {
 			r.close();
-			if (!ok || !tmp.renameTo(configFile)) {
+			if (ok)
+				if (!tmp.renameTo(configFile))
+					if (configFile.exists() && configFile.delete())
+						if (!tmp.renameTo(configFile))
+							throw new IOException("Cannot update config file");
+			if (tmp.exists())
 				tmp.delete();
-			}
 		}
 	}
 
