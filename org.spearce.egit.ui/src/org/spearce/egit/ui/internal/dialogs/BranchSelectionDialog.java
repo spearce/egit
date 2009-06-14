@@ -104,7 +104,7 @@ public class BranchSelectionDialog extends Dialog {
 
 		try {
 			fillTreeWithBranches(null);
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			Activator.logError(UIText.BranchSelectionDialog_ErrorCouldNotRefresh, e);
 		}
 
@@ -294,6 +294,7 @@ public class BranchSelectionDialog extends Dialog {
 						} catch (IOException e1) {
 							Activator.logError(NLS.bind(
 									UIText.BranchSelectionDialog_ErrorCouldNotResolve, testFor), e1);
+							return e1.getMessage();
 						}
 						if (!Repository.isValidRefName(testFor))
 							return UIText.BranchSelectionDialog_ErrorInvalidRefName;
@@ -332,27 +333,28 @@ public class BranchSelectionDialog extends Dialog {
 						try {
 							RefRename renameRef = repo.renameRef(refName, newRefName);
 							if (renameRef.rename() != Result.RENAMED) {
-								MessageDialog.openError(getShell(),
-										UIText.BranchSelectionDialog_ErrorRenameFailed,
-										NLS.bind(UIText.BranchSelectionDialog_ErrorCouldNotRenameRef,
-												new Object[] { refName, newRefName, renameRef.getResult() }));
-								Activator.logError(NLS.bind(
-										UIText.BranchSelectionDialog_ErrorCouldNotRenameRef2,
-												new Object[] { refName, newRefName }), null);
+								reportError(
+										null,
+										UIText.BranchSelectionDialog_BranchSelectionDialog_RenamedFailedTitle,
+										UIText.BranchSelectionDialog_ErrorCouldNotRenameRef,
+										refName, newRefName, renameRef
+												.getResult());
 							}
-							// FIXME: Update HEAD
-						} catch (IOException e1) {
-							Activator.logError(NLS.bind(
-									UIText.BranchSelectionDialog_ErrorCouldNotRenameRef2,
-															newRefName), e1);
+						} catch (Throwable e1) {
+							reportError(
+									e1,
+									UIText.BranchSelectionDialog_BranchSelectionDialog_RenamedFailedTitle,
+									UIText.BranchSelectionDialog_ErrorCouldNotRenameRef,
+									refName, newRefName, e1.getMessage());
 						}
 						try {
 							branchTree.removeAll();
 							fillTreeWithBranches(newRefName);
-						} catch (IOException e1) {
-							Activator.logError(
-									UIText.BranchSelectionDialog_ErrorCouldNotRefreshBranchList,
-											e1);
+						} catch (Throwable e1) {
+							reportError(
+									e1,
+									UIText.BranchSelectionDialog_BranchSelectionDialog_RenamedFailedTitle,
+									UIText.BranchSelectionDialog_ErrorCouldNotRefreshBranchList);
 						}
 					}
 				}
@@ -387,18 +389,20 @@ public class BranchSelectionDialog extends Dialog {
 							updateRef.setNewObjectId(startAt);
 							updateRef.setRefLogMessage("branch: Created from " + startBranch, false); //$NON-NLS-1$
 							updateRef.update();
-						} catch (IOException e1) {
-							Activator.logError(NLS.bind(
+						} catch (Throwable e1) {
+							reportError(
+									e1,
+									UIText.BranchSelectionDialog_BranchSelectionDialog_CreateFailedTitle,
 									UIText.BranchSelectionDialog_ErrorCouldNotCreateNewRef,
-															newRefName), e1);
+									newRefName);
 						}
 						try {
 							branchTree.removeAll();
 							fillTreeWithBranches(newRefName);
-						} catch (IOException e1) {
-							Activator.logError(
-									UIText.BranchSelectionDialog_ErrorCouldNotRefreshBranchList,
-											e1);
+						} catch (Throwable e1) {
+							reportError(e1,
+									UIText.BranchSelectionDialog_BranchSelectionDialog_CreateFailedTitle,
+									UIText.BranchSelectionDialog_ErrorCouldNotRefreshBranchList);
 						}
 					}
 				}
@@ -418,5 +422,12 @@ public class BranchSelectionDialog extends Dialog {
 	@Override
 	protected int getShellStyle() {
 		return super.getShellStyle() | SWT.RESIZE;
+	}
+
+	private void reportError(Throwable e, String title, String message,
+			Object... args) {
+		String msg = NLS.bind(message, args);
+		MessageDialog.openError(getShell(), title, msg);
+		Activator.logError(msg, e);
 	}
 }

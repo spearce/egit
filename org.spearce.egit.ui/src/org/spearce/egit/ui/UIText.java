@@ -899,6 +899,12 @@ public class UIText extends NLS {
 	public static String BranchSelectionDialog_ErrorCouldNotRenameRef2;
 
 	/** */
+	public static String BranchSelectionDialog_BranchSelectionDialog_CreateFailedTitle;
+
+	/** */
+	public static String BranchSelectionDialog_BranchSelectionDialog_RenamedFailedTitle;
+
+	/** */
 	public static String BranchSelectionDialog_BranchSuffix_Current;
 
 	/** */
