@@ -893,6 +893,12 @@ public class UIText extends NLS {
 	public static String BranchSelectionDialog_ErrorCouldNotRefresh;
 
 	/** */
+	public static String BranchSelectionDialog_ErrorCouldNotRenameRef;
+
+	/** */
+	public static String BranchSelectionDialog_ErrorCouldNotRenameRef2;
+
+	/** */
 	public static String BranchSelectionDialog_BranchSuffix_Current;
 
 	/** */
@@ -929,6 +935,12 @@ public class UIText extends NLS {
 	public static String BranchSelectionDialog_QuestionNewBranchTitle;
 
 	/** */
+	public static String BranchSelectionDialog_QuestionNewBranchNameTitle;
+
+	/** */
+	public static String BranchSelectionDialog_QuestionNewBranchNameMessage;
+
+	/** */
 	public static String BranchSelectionDialog_QuestionNewBranchMessage;
 
 	/** */
@@ -944,6 +956,9 @@ public class UIText extends NLS {
 	public static String BranchSelectionDialog_ErrorInvalidRefName;
 
 	/** */
+	public static String BranchSelectionDialog_ErrorRenameFailed;
+
+	/** */
 	public static String BranchSelectionDialog_OkCheckout;
 
 	/** */
@@ -951,6 +966,9 @@ public class UIText extends NLS {
 
 	/** */
 	public static String BranchSelectionDialog_Refs;
+
+	/** */
+	public static String BranchSelectionDialog_Rename;
 
 	/** */
 	public static String HistoryPage_ShowAllVersionsForProject;
