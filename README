@@ -6,7 +6,7 @@ and LICENSE files for the complete licenses within each package.
 This package is actually composed of three major components plus
 three for packaging.
 
-  org.spearce.egit.core/
+  org.eclipse.egit.core/
 
     An Eclipse plugin providing an interface to org.spearce.jgit
     and support routines to allow processing against the Eclipse
@@ -14,33 +14,33 @@ three for packaging.
     file APIs.  It also supplies the team provider implementation.
     Everything here is EPL.
 
-  org.spearce.egit.ui/
+  org.eclipse.egit.ui/
 
     An Eclipse plugin providing the user interface on top of
-    org.spearce.egit.core.
+    org.eclipse.egit.core.
 
     Everything here is EPL.
 
-  org.spearce.egit.core.test/
+  org.eclipse.egit.core.test/
 
-    Unit tests for org.spearce.egit.core.
+    Unit tests for org.eclipse.egit.core.
 
     Everything here is EPL.
 
-  org.spearce.egit/
+  org.eclipse.egit/
 
     A plugin for packaging
 
     Everything here is EPL.
 
-  org.spearce.egit-feature
+  org.eclipse.egit-feature
 
     Also packaging. This project is for building an Eclipse "feature"
     out of the plugins above.
 
     Everything here is EPL.
 
-  org.spearce.egit-updatesite/
+  org.eclipse.egit-updatesite/
 
     This package is for producing and update site, i.e. a web site
     you can point your eclipse at and just upgrade.
@@ -77,7 +77,7 @@ three for packaging.
 
             == Package Features                ==
 
-  org.spearce.egit.core/
+  org.eclipse.egit.core/
 
     * Supplies an Eclipse team provider.
 
@@ -94,7 +94,7 @@ three for packaging.
 
     * Resolves through linked containers.
 
-  org.spearce.egit.ui/
+  org.eclipse.egit.ui/
 
     * Connect team provider wizard panels.
 

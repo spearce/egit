@@ -21,7 +21,7 @@ things.
 
 INSTALLATION INSTRUCTIONS
 
-- Delete any old versions of the plugin in the <eclipse-path>/plugins/org.spearce.*
+- Delete any old versions of the plugin in the <eclipse-path>/plugins/org.eclipse.egit.*
 - Start eclipse
 - Make sure a recent JDK 1.5.0_11 or JDK 1.6.x is among your installed JRE's. Which
   one is the default should not matter but Java 6 is recommended. 
@@ -29,7 +29,7 @@ INSTALLATION INSTRUCTIONS
 - Now you can either export the plugin to a set of jar files to use in an Eclipse 
   installation or run it from within Eclipse. The latter is for development and 
   tracking down bugs.
-- Export the plugin by selecting the org.spearce.* packages in package
+- Export the plugin by selecting the org.eclipse.egit.* packages in package
   explorer and choosing File/Export. Then select Deployable plug-ins and 
   fragments and choose the Next button. Set Directory to the top of your
   installation directory (NOT the plugins directory). Select Finish. After 
@@ -37,7 +37,7 @@ INSTALLATION INSTRUCTIONS
   Team>Share menu in the context menu when a project is selected.
 
 DEBUGGING INSTRUCTIONS
-- Select the org.spearce.egit.ui project, and using the context menu select
+- Select the org.eclipse.egit.ui project, and using the context menu select
   Run As(or Debug As) / Eclipse Application. Make sure the application runs
   using JDK 1.6 (or JDK1.5.0_11 or newer) if you have any problems.
 

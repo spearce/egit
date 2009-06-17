@@ -10,8 +10,8 @@ then
 fi
 
 MF=$(git ls-files | grep META-INF/MANIFEST.MF)
-FX=org.spearce.egit-feature/feature.xml
-SX=org.spearce.egit-updatesite/site.xml
+FX=org.eclipse.egit-feature/feature.xml
+SX=org.eclipse.egit-updatesite/site.xml
 ALL="$MF $FX $SX"
 
 replace() {
