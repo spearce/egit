@@ -188,7 +188,7 @@ public class BranchSelectionDialog extends Dialog {
 				}
 			} else if (ref.startsWith(Constants.R_TAGS)) {
 				shortName = ref.substring(10);
-				if (!Constants.R_HEADS.equals(curPrefix)) {
+				if (!Constants.R_TAGS.equals(curPrefix)) {
 					curPrefix = Constants.R_TAGS;
 					curSubPrefix = null;
 					curSubItem = null;
