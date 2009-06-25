@@ -9,6 +9,8 @@
    <description url="http://www.jgit.org">
 An Eclipse Git Plugin in pure Java.
 
+ !!!Uninstall any pre-0.5 plugins!!!
+
 @buildId@
 
 Changes on @branch@ since @refversion@:
