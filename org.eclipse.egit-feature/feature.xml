@@ -300,7 +300,7 @@ litigation.
    </license>
 
    <url>
-      <update label="Eclipse Update Site (experimental)" url="http://www.jgit.org/update-site"/>
+      <update label="Eclipse Update Site (experimental)" url="http://www.jgit.org/updates"/>
    </url>
 
    <requires>
