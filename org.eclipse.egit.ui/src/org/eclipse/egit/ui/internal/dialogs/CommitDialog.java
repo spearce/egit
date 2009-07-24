@@ -63,6 +63,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.team.core.RepositoryProvider;
 import org.eclipse.team.core.history.IFileHistory;
+import org.eclipse.team.core.history.IFileHistoryProvider;
 import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.internal.ui.history.FileRevisionTypedElement;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
@@ -551,9 +552,9 @@ public class CommitDialog extends Dialog {
 			GitProvider provider = (GitProvider) RepositoryProvider.getProvider(project);
 			GitFileHistoryProvider fileHistoryProvider = (GitFileHistoryProvider) provider.getFileHistoryProvider();
 
-			IFileHistory fileHistory = fileHistoryProvider.getFileHistoryFor(commitItem.file, 0, null);
+			IFileHistory fileHistory = fileHistoryProvider.getFileHistoryFor(commitItem.file, IFileHistoryProvider.SINGLE_REVISION, null);
 
-			IFileRevision baseFile = fileHistory.getFileRevision(headCommit.getCommitId().name());
+			IFileRevision baseFile = fileHistory.getFileRevisions()[0];
 			IFileRevision nextFile = fileHistoryProvider.getWorkspaceFileRevision(commitItem.file);
 
 			ITypedElement base = new FileRevisionTypedElement(baseFile);

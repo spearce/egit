@@ -22,7 +22,6 @@ import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.core.history.provider.FileHistory;
 import org.spearce.jgit.lib.AnyObjectId;
 import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.ObjectId;
 import org.spearce.jgit.lib.Repository;
 import org.spearce.jgit.revwalk.RevCommit;
 import org.spearce.jgit.treewalk.filter.AndTreeFilter;
@@ -168,28 +167,12 @@ class GitFileHistory extends FileHistory implements IAdaptable {
 		if (GitFileRevision.INDEX.equals(id))
 			return new IndexFileRevision(walk.getRepository(), gitPath);
 
-		// If we have no walk we somehow failed to initialize during our
-		// constructor, but there is no clear way to report errors other
-		// than to just construct yourself anyway and then later return
-		// no results to the user.
-		//
-		if (walk == null)
-			return null;
-
-		try {
-			final ObjectId binId = ObjectId.fromString(id);
-			final Repository db = walk.getRepository();
-			return new CommitFileRevision(db, walk.parseCommit(binId), gitPath);
-		} catch (IllegalArgumentException e) {
-			return null;
-		} catch (IOException e) {
-			// The interface definition suggests we should be returning
-			// null if the supplied id string is invalid for a revision.
-			//
-			Activator.logError("Error commit for file revision " + id + " of "
-					+ resource.getFullPath(), e);
-			return null;
+		// Only return a revision if it was matched by this filtered history
+		for (IFileRevision r : revisions) {
+			if (r.getContentIdentifier().equals(id))
+				return r;
 		}
+		return null;
 	}
 
 	public IFileRevision[] getFileRevisions() {
