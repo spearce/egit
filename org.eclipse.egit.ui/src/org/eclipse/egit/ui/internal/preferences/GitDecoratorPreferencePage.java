@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright (C) 2003, 2006 Subclipse project and others.
- * Copyright (C) 2008, Tor Arne Vestbø <torarnv@gmail.com>
+ * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (C) 2009, Tor Arne Vestbø <torarnv@gmail.com>
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -28,7 +28,6 @@ import org.eclipse.egit.ui.internal.decorators.IDecoratableResource;
 import org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.DecorationHelper;
 import org.eclipse.egit.ui.internal.decorators.IDecoratableResource.Staged;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.preference.PreferenceStore;
@@ -79,68 +78,86 @@ import org.eclipse.ui.dialogs.ListSelectionDialog;
 import org.eclipse.ui.ide.IDE.SharedImages;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
-
 /**
  * Preference page for customizing Git label decorations
  */
 public class GitDecoratorPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 
-	private Text fileTextFormat;
+	private GeneralTab generalTab;
 
-	private Text folderTextFormat;
+	private TextDecorationTab textDecorationTab;
 
-	private Text projectTextFormat;
-
-	private Button recomputeAncestorDecorations;
-
-	private Scale containerRecurseLimit;
-
-	private Button showTracked;
-
-	private Button showUntracked;
+	private IconDecorationTab iconDecorationTab;
 
 	private Preview preview;
 
-	private Button showStaged;
-
-	private Button showConflicts;
-
-	private Button showAssumeValid;
-
 	private static final Collection PREVIEW_FILESYSTEM_ROOT;
+
+	private static final Map<String, String> FILE_AND_FOLDER_BINDINGS;
+
+	private static final Map<String, String> PROJECT_BINDINGS;
 
 	private static IPropertyChangeListener themeListener;
 
 	static {
 		final PreviewResource project = new PreviewResource(
-				"Project", IResource.PROJECT, "master", true, false, true, Staged.NOT_STAGED, false, false); //$NON-NLS-1$1
+				"Project", IResource.PROJECT, "master", true, false, true, Staged.NOT_STAGED, false, false); //$NON-NLS-1$ //$NON-NLS-2$1
 		final ArrayList<PreviewResource> children = new ArrayList<PreviewResource>();
 
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"folder", IResource.FOLDER, null, true, false, true, Staged.NOT_STAGED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"tracked.txt", IResource.FILE, null, true, false, false, Staged.NOT_STAGED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"untracked.txt", IResource.FILE, null, false, false, false, Staged.NOT_STAGED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"ignored.txt", IResource.FILE, null, false, true, false, Staged.NOT_STAGED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"dirty.txt", IResource.FILE, null, true, false, true, Staged.NOT_STAGED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"staged.txt", IResource.FILE, null, true, false, false, Staged.MODIFIED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"partially-staged.txt", IResource.FILE, null, true, false, true, Staged.MODIFIED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"added.txt", IResource.FILE, null, true, false, false, Staged.ADDED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"removed.txt", IResource.FILE, null, true, false, false, Staged.REMOVED, false, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"conflict.txt", IResource.FILE, null, true, false, true, Staged.NOT_STAGED, true, false)); //$NON-NLS-1$
-		children.add(new PreviewResource(
+		children
+				.add(new PreviewResource(
 						"assume-valid.txt", IResource.FILE, null, true, false, false, Staged.NOT_STAGED, false, true)); //$NON-NLS-1$
 		project.children = children;
 		PREVIEW_FILESYSTEM_ROOT = Collections.singleton(project);
+
+		FILE_AND_FOLDER_BINDINGS = new HashMap<String, String>();
+		FILE_AND_FOLDER_BINDINGS.put(DecorationHelper.BINDING_RESOURCE_NAME,
+				UIText.DecoratorPreferencesPage_bindingResourceName);
+		FILE_AND_FOLDER_BINDINGS.put(DecorationHelper.BINDING_DIRTY_FLAG,
+				UIText.DecoratorPreferencesPage_bindingDirtyFlag);
+		FILE_AND_FOLDER_BINDINGS.put(DecorationHelper.BINDING_STAGED_FLAG,
+				UIText.DecoratorPreferencesPage_bindingStagedFlag);
+
+		PROJECT_BINDINGS = new HashMap<String, String>();
+		PROJECT_BINDINGS.put(DecorationHelper.BINDING_RESOURCE_NAME,
+				UIText.DecoratorPreferencesPage_bindingResourceName);
+		PROJECT_BINDINGS.put(DecorationHelper.BINDING_DIRTY_FLAG,
+				UIText.DecoratorPreferencesPage_bindingDirtyFlag);
+		PROJECT_BINDINGS.put(DecorationHelper.BINDING_STAGED_FLAG,
+				UIText.DecoratorPreferencesPage_bindingStagedFlag);
+		PROJECT_BINDINGS.put(DecorationHelper.BINDING_BRANCH_NAME,
+				UIText.DecoratorPreferencesPage_bindingBranchName);
 	}
 
 	/**
@@ -166,22 +183,18 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 		TabFolder tabFolder = new TabFolder(composite, SWT.NONE);
 		tabFolder.setLayoutData(SWTUtils.createHVFillGridData());
 
-		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText(UIText.DecoratorPreferencesPage_generalTabFolder);
-		tabItem.setControl(createGeneralDecoratorPage(tabFolder));
-
-		tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText(UIText.DecoratorPreferencesPage_textLabel);
-		tabItem.setControl(createTextDecoratorPage(tabFolder));
-
-		tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText(UIText.DecoratorPreferencesPage_iconLabel);
-		tabItem.setControl(createIconDecoratorPage(tabFolder));
+		generalTab = new GeneralTab(tabFolder);
+		textDecorationTab = new TextDecorationTab(tabFolder);
+		iconDecorationTab = new IconDecorationTab(tabFolder);
 
 		initializeValues();
 
 		preview = new Preview(composite);
 		preview.refresh();
+
+		generalTab.addObserver(preview);
+		textDecorationTab.addObserver(preview);
+		iconDecorationTab.addObserver(preview);
 
 		// TODO: Add help text for this preference page
 
@@ -198,161 +211,381 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 		return composite;
 	}
 
-	private Control createGeneralDecoratorPage(Composite parent) {
-		Composite composite = SWTUtils.createHVFillComposite(parent,
-				SWTUtils.MARGINS_DEFAULT, 1);
+	/**
+	 * Wrapper class for TabItems used in the preference page TabFolder
+	 *
+	 * The reason for this wrapper is mainly that the class TabItem is not
+	 * supposed to be subclassed.
+	 *
+	 * When controls in the tab change it will emit update() to any registered
+	 * observers. This is currently used for updating the decoration preview.
+	 */
+	private abstract class Tab extends Observable {
+		public abstract void initializeValues(IPreferenceStore store);
 
-		recomputeAncestorDecorations = SWTUtils.createCheckBox(composite,
-				UIText.DecoratorPreferencesPage_recomputeAncestorDecorations);
-		recomputeAncestorDecorations
-				.setToolTipText(UIText.DecoratorPreferencesPage_recomputeAncestorDecorationsTooltip);
+		public abstract void performDefaults(IPreferenceStore store);
 
-		SWTUtils.createLabel(composite,
-				UIText.DecoratorPreferencesPage_computeRecursiveLimit);
-		containerRecurseLimit = createLabeledScaleControl(composite);
-		containerRecurseLimit
-				.setToolTipText(UIText.DecoratorPreferencesPage_computeRecursiveLimitTooltip);
-
-		return composite;
-	}
-
-	private Scale createLabeledScaleControl(Composite parent) {
-
-		final int[] values = new int[] { 0, 1, 2, 3, 5, 10, 15, 20, 50, 100,
-				Integer.MAX_VALUE };
-
-		Composite composite = SWTUtils.createHVFillComposite(parent,
-				SWTUtils.MARGINS_DEFAULT);
-
-		Composite labels = SWTUtils.createHVFillComposite(composite,
-				SWTUtils.MARGINS_NONE, values.length);
-		GridLayout labelsLayout = (GridLayout) labels.getLayout();
-		labelsLayout.makeColumnsEqualWidth = true;
-		labelsLayout.horizontalSpacing = 0;
-		labels.setLayoutData(SWTUtils.createGridData(-1, -1, SWT.FILL,
-				SWT.FILL, false, false));
-
-		for (int i = 0; i < values.length; ++i) {
-			Label label = SWTUtils.createLabel(labels, "" + values[i]);
-			if (i == 0) {
-				label.setAlignment(SWT.LEFT);
-				label.setText("Off");
-			} else if (i == values.length - 1) {
-				label.setAlignment(SWT.RIGHT);
-				label.setText("Inf.");
-			} else {
-				label.setAlignment(SWT.CENTER);
-			}
-		}
-
-		final Scale scale = new Scale(composite, SWT.HORIZONTAL);
-		scale.setLayoutData(SWTUtils.createHVFillGridData());
-		scale.setMaximum(values.length - 1);
-		scale.setMinimum(0);
-		scale.setIncrement(1);
-		scale.setPageIncrement(1);
-
-		scale.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
-				// Workaround for GTK treating the slider as stepless
-				scale.setSelection(scale.getSelection());
-			}
-		});
-
-		return scale;
+		public abstract void performOk(IPreferenceStore store);
 	}
 
 	/**
-	 * Creates the controls for the first tab folder
-	 *
-	 * @param parent
-	 *
-	 * @return the control
+	 * Tab page for general preferences related to decoration
 	 */
-	private Control createTextDecoratorPage(Composite parent) {
-		Composite fileTextGroup = SWTUtils.createHVFillComposite(parent,
-				SWTUtils.MARGINS_DEFAULT, 3);
+	private class GeneralTab extends Tab implements SelectionListener {
 
-		int labelWidth = convertWidthInCharsToPixels(Math.max(
-				UIText.DecoratorPreferencesPage_fileFormatLabel.length(),
-				Math.max(UIText.DecoratorPreferencesPage_folderFormatLabel
-						.length(),
-						UIText.DecoratorPreferencesPage_projectFormatLabel
-								.length())));
+		private Button recomputeAncestorDecorations;
 
-		TextPair format = createFormatEditorControl(fileTextGroup,
-				UIText.DecoratorPreferencesPage_fileFormatLabel,
-				UIText.DecoratorPreferencesPage_addVariablesAction,
-				getFileBindingDescriptions(), labelWidth);
-		fileTextFormat = format.t1;
+		private Scale containerRecurseLimit;
 
-		format = createFormatEditorControl(fileTextGroup,
-				UIText.DecoratorPreferencesPage_folderFormatLabel,
-				UIText.DecoratorPreferencesPage_addVariablesAction,
-				getFolderBindingDescriptions(), labelWidth);
-		folderTextFormat = format.t1;
+		public GeneralTab(TabFolder parent) {
+			Composite composite = SWTUtils.createHVFillComposite(parent,
+					SWTUtils.MARGINS_DEFAULT, 1);
 
-		format = createFormatEditorControl(fileTextGroup,
-				UIText.DecoratorPreferencesPage_projectFormatLabel,
-				UIText.DecoratorPreferencesPage_addVariablesAction,
-				getProjectBindingDescriptions(), labelWidth);
-		projectTextFormat = format.t1;
+			recomputeAncestorDecorations = SWTUtils
+					.createCheckBox(
+							composite,
+							UIText.DecoratorPreferencesPage_recomputeAncestorDecorations);
+			recomputeAncestorDecorations
+					.setToolTipText(UIText.DecoratorPreferencesPage_recomputeAncestorDecorationsTooltip);
 
-		return fileTextGroup;
+			SWTUtils.createLabel(composite,
+					UIText.DecoratorPreferencesPage_computeRecursiveLimit);
+			containerRecurseLimit = createLabeledScaleControl(composite);
+			containerRecurseLimit
+					.setToolTipText(UIText.DecoratorPreferencesPage_computeRecursiveLimitTooltip);
+
+			recomputeAncestorDecorations.addSelectionListener(this);
+			containerRecurseLimit.addSelectionListener(this);
+
+			final TabItem tabItem = new TabItem(parent, SWT.NONE);
+			tabItem.setText(UIText.DecoratorPreferencesPage_generalTabFolder);
+			tabItem.setControl(composite);
+		}
+
+		public void initializeValues(IPreferenceStore store) {
+			recomputeAncestorDecorations.setSelection(store
+					.getBoolean(UIPreferences.DECORATOR_RECOMPUTE_ANCESTORS));
+			containerRecurseLimit.setSelection(store
+					.getInt(UIPreferences.DECORATOR_RECURSIVE_LIMIT));
+		}
+
+		public void performDefaults(IPreferenceStore store) {
+			recomputeAncestorDecorations
+					.setSelection(store
+							.getDefaultBoolean(UIPreferences.DECORATOR_RECOMPUTE_ANCESTORS));
+			containerRecurseLimit.setSelection(store
+					.getDefaultInt(UIPreferences.DECORATOR_RECURSIVE_LIMIT));
+		}
+
+		public void performOk(IPreferenceStore store) {
+			store.setValue(UIPreferences.DECORATOR_RECOMPUTE_ANCESTORS,
+					recomputeAncestorDecorations.getSelection());
+			store.setValue(UIPreferences.DECORATOR_RECURSIVE_LIMIT,
+					containerRecurseLimit.getSelection());
+		}
+
+		public void widgetSelected(SelectionEvent e) {
+			setChanged();
+			notifyObservers();
+		}
+
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// Not interesting for us
+		}
+
+		private Scale createLabeledScaleControl(Composite parent) {
+
+			final int[] values = new int[] { 0, 1, 2, 3, 5, 10, 15, 20, 50,
+					100, Integer.MAX_VALUE };
+
+			Composite composite = SWTUtils.createHVFillComposite(parent,
+					SWTUtils.MARGINS_DEFAULT);
+
+			Composite labels = SWTUtils.createHVFillComposite(composite,
+					SWTUtils.MARGINS_NONE, values.length);
+			GridLayout labelsLayout = (GridLayout) labels.getLayout();
+			labelsLayout.makeColumnsEqualWidth = true;
+			labelsLayout.horizontalSpacing = 0;
+			labels.setLayoutData(SWTUtils.createGridData(-1, -1, SWT.FILL,
+					SWT.FILL, false, false));
+
+			for (int i = 0; i < values.length; ++i) {
+				Label label = SWTUtils.createLabel(labels, "" + values[i]); //$NON-NLS-1$
+				if (i == 0) {
+					label.setAlignment(SWT.LEFT);
+					label.setText("Off"); //$NON-NLS-1$
+				} else if (i == values.length - 1) {
+					label.setAlignment(SWT.RIGHT);
+					label.setText("Inf."); //$NON-NLS-1$
+				} else {
+					label.setAlignment(SWT.CENTER);
+				}
+			}
+
+			final Scale scale = new Scale(composite, SWT.HORIZONTAL);
+			scale.setLayoutData(SWTUtils.createHVFillGridData());
+			scale.setMaximum(values.length - 1);
+			scale.setMinimum(0);
+			scale.setIncrement(1);
+			scale.setPageIncrement(1);
+
+			scale.addListener(SWT.Selection, new Listener() {
+				public void handleEvent(Event event) {
+					// Workaround for GTK treating the slider as stepless
+					scale.setSelection(scale.getSelection());
+				}
+			});
+
+			return scale;
+		}
 	}
 
-	private Control createIconDecoratorPage(Composite parent) {
-		Composite imageGroup = SWTUtils.createHVFillComposite(parent,
-				SWTUtils.MARGINS_DEFAULT, 2);
+	/**
+	 * The tab page for text-decoration preferences
+	 */
+	private class TextDecorationTab extends Tab implements ModifyListener {
 
-		showTracked = SWTUtils.createCheckBox(imageGroup,
-				UIText.DecoratorPreferencesPage_iconsShowTracked);
-		showUntracked = SWTUtils.createCheckBox(imageGroup,
-				UIText.DecoratorPreferencesPage_iconsShowUntracked);
-		showStaged = SWTUtils.createCheckBox(imageGroup,
-				UIText.DecoratorPreferencesPage_iconsShowStaged);
-		showConflicts = SWTUtils.createCheckBox(imageGroup,
-				UIText.DecoratorPreferencesPage_iconsShowConflicts);
-		showAssumeValid = SWTUtils.createCheckBox(imageGroup,
-				UIText.DecoratorPreferencesPage_iconsShowAssumeValid);
+		private final FormatEditor fileTextFormat;
 
-		return imageGroup;
+		private final FormatEditor folderTextFormat;
+
+		private final FormatEditor projectTextFormat;
+
+		public TextDecorationTab(TabFolder parent) {
+			Composite composite = SWTUtils.createHVFillComposite(parent,
+					SWTUtils.MARGINS_DEFAULT, 3);
+
+			fileTextFormat = new FormatEditor(composite,
+					UIText.DecoratorPreferencesPage_fileFormatLabel,
+					UIText.DecoratorPreferencesPage_addVariablesAction,
+					FILE_AND_FOLDER_BINDINGS,
+					UIPreferences.DECORATOR_FILETEXT_DECORATION);
+			folderTextFormat = new FormatEditor(composite,
+					UIText.DecoratorPreferencesPage_folderFormatLabel,
+					UIText.DecoratorPreferencesPage_addVariablesAction,
+					FILE_AND_FOLDER_BINDINGS,
+					UIPreferences.DECORATOR_FOLDERTEXT_DECORATION);
+			projectTextFormat = new FormatEditor(composite,
+					UIText.DecoratorPreferencesPage_projectFormatLabel,
+					UIText.DecoratorPreferencesPage_addVariablesAction,
+					PROJECT_BINDINGS,
+					UIPreferences.DECORATOR_PROJECTTEXT_DECORATION);
+
+			fileTextFormat.addModifyListener(this);
+			folderTextFormat.addModifyListener(this);
+			projectTextFormat.addModifyListener(this);
+
+			final TabItem tabItem = new TabItem(parent, SWT.NONE);
+			tabItem.setText(UIText.DecoratorPreferencesPage_textLabel);
+			tabItem.setControl(composite);
+		}
+
+		public void initializeValues(IPreferenceStore store) {
+			fileTextFormat.initializeValue(store);
+			folderTextFormat.initializeValue(store);
+			projectTextFormat.initializeValue(store);
+		}
+
+		public void performDefaults(IPreferenceStore store) {
+			fileTextFormat.performDefaults(store);
+			folderTextFormat.performDefaults(store);
+			projectTextFormat.performDefaults(store);
+		}
+
+		public void performOk(IPreferenceStore store) {
+			fileTextFormat.performOk(store);
+			folderTextFormat.performOk(store);
+			projectTextFormat.performOk(store);
+		}
+
+		public void modifyText(ModifyEvent e) {
+			setChanged();
+			notifyObservers();
+		}
+
+		private class FormatEditor extends SelectionAdapter {
+			private final Text text;
+
+			private final Map bindings;
+
+			private final String key;
+
+			public FormatEditor(Composite composite, String title,
+					String buttonText, Map bindings, String key) {
+
+				this.key = key;
+				this.bindings = bindings;
+
+				final Label label = SWTUtils.createLabel(composite, title);
+				label.setLayoutData(SWTUtils.createGridData(SWT.DEFAULT,
+						SWT.DEFAULT, false, false));
+
+				text = SWTUtils.createText(composite);
+
+				final Button button = new Button(composite, SWT.NONE);
+				button.setText(buttonText);
+				button.setLayoutData(new GridData());
+
+				button.addSelectionListener(this);
+			}
+
+			public void addModifyListener(ModifyListener listener) {
+				text.addModifyListener(listener);
+			}
+
+			public String getText() {
+				return text.getText();
+			}
+
+			public void widgetSelected(SelectionEvent e) {
+				final ILabelProvider labelProvider = new LabelProvider() {
+					public String getText(Object element) {
+						return ((Map.Entry) element).getKey()
+								+ " - " + ((Map.Entry) element).getValue(); //$NON-NLS-1$
+					}
+				};
+
+				final IStructuredContentProvider contentsProvider = new IStructuredContentProvider() {
+					public Object[] getElements(Object inputElement) {
+						return ((Collection) inputElement).toArray();
+					}
+
+					public void dispose() {
+						// No-op
+					}
+
+					public void inputChanged(Viewer viewer, Object oldInput,
+							Object newInput) {
+						// No-op
+					}
+				};
+
+				final ListSelectionDialog dialog = new ListSelectionDialog(text
+						.getShell(), bindings.entrySet(), contentsProvider,
+						labelProvider,
+						UIText.DecoratorPreferencesPage_selectVariablesToAdd);
+				dialog.setHelpAvailable(false);
+				dialog
+						.setTitle(UIText.DecoratorPreferencesPage_addVariablesTitle);
+				if (dialog.open() != Window.OK)
+					return;
+
+				Object[] result = dialog.getResult();
+
+				for (int i = 0; i < result.length; i++) {
+					text.insert("{" + ((Map.Entry) result[i]).getKey() + "}"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
+
+			public void performOk(IPreferenceStore store) {
+				store.setValue(key, text.getText());
+			}
+
+			public void performDefaults(IPreferenceStore store) {
+				store.setToDefault(key);
+				text.setText(store.getDefaultString(key));
+			}
+
+			public void initializeValue(IPreferenceStore store) {
+				text.setText(store.getString(key));
+			}
+		}
 	}
 
-	private TextPair createFormatEditorControl(Composite composite,
-			String title, String buttonText, final Map supportedBindings,
-			int labelWidth) {
+	/**
+	 * Tab page for icon-related preferences
+	 */
+	private class IconDecorationTab extends Tab implements SelectionListener {
 
-		Label label = SWTUtils.createLabel(composite, title);
-		GridData labelGridData = new GridData();
-		labelGridData.widthHint = labelWidth;
-		label.setLayoutData(labelGridData);
+		private Button showTracked;
 
-		Text format = new Text(composite, SWT.BORDER);
-		GridData textGridData = new GridData(GridData.FILL_HORIZONTAL);
-		textGridData.widthHint = 200;
-		format.setLayoutData(textGridData);
-		format.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				updatePreview();
-			}
-		});
-		Button b = new Button(composite, SWT.NONE);
-		b.setText(buttonText);
-		GridData data = new GridData();
-		data.horizontalAlignment = GridData.FILL;
-		int widthHint = convertHorizontalDLUsToPixels(IDialogConstants.BUTTON_WIDTH);
-		data.widthHint = Math.max(widthHint, b.computeSize(SWT.DEFAULT,
-				SWT.DEFAULT, true).x);
-		b.setLayoutData(data);
-		final Text formatToInsert = format;
-		b.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
-				addVariables(formatToInsert, supportedBindings);
-			}
-		});
+		private Button showUntracked;
 
-		return new TextPair(format, null);
+		private Button showStaged;
+
+		private Button showConflicts;
+
+		private Button showAssumeValid;
+
+		public IconDecorationTab(TabFolder parent) {
+			Composite composite = SWTUtils.createHVFillComposite(parent,
+					SWTUtils.MARGINS_DEFAULT, 2);
+
+			showTracked = SWTUtils.createCheckBox(composite,
+					UIText.DecoratorPreferencesPage_iconsShowTracked);
+			showUntracked = SWTUtils.createCheckBox(composite,
+					UIText.DecoratorPreferencesPage_iconsShowUntracked);
+			showStaged = SWTUtils.createCheckBox(composite,
+					UIText.DecoratorPreferencesPage_iconsShowStaged);
+			showConflicts = SWTUtils.createCheckBox(composite,
+					UIText.DecoratorPreferencesPage_iconsShowConflicts);
+			showAssumeValid = SWTUtils.createCheckBox(composite,
+					UIText.DecoratorPreferencesPage_iconsShowAssumeValid);
+
+			showTracked.addSelectionListener(this);
+			showUntracked.addSelectionListener(this);
+			showStaged.addSelectionListener(this);
+			showConflicts.addSelectionListener(this);
+			showAssumeValid.addSelectionListener(this);
+
+			final TabItem tabItem = new TabItem(parent, SWT.NONE);
+			tabItem.setText(UIText.DecoratorPreferencesPage_iconLabel);
+			tabItem.setControl(composite);
+		}
+
+		public void initializeValues(IPreferenceStore store) {
+			showTracked.setSelection(store
+					.getBoolean(UIPreferences.DECORATOR_SHOW_TRACKED_ICON));
+			showUntracked.setSelection(store
+					.getBoolean(UIPreferences.DECORATOR_SHOW_UNTRACKED_ICON));
+			showStaged.setSelection(store
+					.getBoolean(UIPreferences.DECORATOR_SHOW_STAGED_ICON));
+			showConflicts.setSelection(store
+					.getBoolean(UIPreferences.DECORATOR_SHOW_CONFLICTS_ICON));
+			showAssumeValid
+					.setSelection(store
+							.getBoolean(UIPreferences.DECORATOR_SHOW_ASSUME_VALID_ICON));
+		}
+
+		public void performDefaults(IPreferenceStore store) {
+			showTracked
+					.setSelection(store
+							.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_TRACKED_ICON));
+			showUntracked
+					.setSelection(store
+							.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_UNTRACKED_ICON));
+			showStaged
+					.setSelection(store
+							.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_STAGED_ICON));
+			showConflicts
+					.setSelection(store
+							.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_CONFLICTS_ICON));
+			showAssumeValid
+					.setSelection(store
+							.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_ASSUME_VALID_ICON));
+		}
+
+		public void performOk(IPreferenceStore store) {
+			store.setValue(UIPreferences.DECORATOR_SHOW_TRACKED_ICON,
+					showTracked.getSelection());
+			store.setValue(UIPreferences.DECORATOR_SHOW_UNTRACKED_ICON,
+					showUntracked.getSelection());
+			store.setValue(UIPreferences.DECORATOR_SHOW_STAGED_ICON, showStaged
+					.getSelection());
+			store.setValue(UIPreferences.DECORATOR_SHOW_CONFLICTS_ICON,
+					showConflicts.getSelection());
+			store.setValue(UIPreferences.DECORATOR_SHOW_ASSUME_VALID_ICON,
+					showAssumeValid.getSelection());
+		}
+
+		public void widgetSelected(SelectionEvent e) {
+			setChanged();
+			notifyObservers();
+		}
+
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// Not interesting for us
+		}
 	}
 
 	/**
@@ -360,42 +593,9 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 	 */
 	private void initializeValues() {
 		final IPreferenceStore store = getPreferenceStore();
-
-		recomputeAncestorDecorations.setSelection(store
-				.getBoolean(UIPreferences.DECORATOR_RECOMPUTE_ANCESTORS));
-		containerRecurseLimit.setSelection(store
-				.getInt(UIPreferences.DECORATOR_RECURSIVE_LIMIT));
-
-		fileTextFormat.setText(store
-				.getString(UIPreferences.DECORATOR_FILETEXT_DECORATION));
-		folderTextFormat.setText(store
-				.getString(UIPreferences.DECORATOR_FOLDERTEXT_DECORATION));
-		projectTextFormat.setText(store
-				.getString(UIPreferences.DECORATOR_PROJECTTEXT_DECORATION));
-
-		showTracked.setSelection(store
-				.getBoolean(UIPreferences.DECORATOR_SHOW_TRACKED_ICON));
-		showUntracked.setSelection(store
-				.getBoolean(UIPreferences.DECORATOR_SHOW_UNTRACKED_ICON));
-		showStaged.setSelection(store
-				.getBoolean(UIPreferences.DECORATOR_SHOW_STAGED_ICON));
-		showConflicts.setSelection(store
-				.getBoolean(UIPreferences.DECORATOR_SHOW_CONFLICTS_ICON));
-		showAssumeValid.setSelection(store
-				.getBoolean(UIPreferences.DECORATOR_SHOW_ASSUME_VALID_ICON));
-
-		SelectionListener selectionListener = new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				preview.refresh();
-			}
-		};
-
-		showTracked.addSelectionListener(selectionListener);
-		showUntracked.addSelectionListener(selectionListener);
-		showStaged.addSelectionListener(selectionListener);
-		showConflicts.addSelectionListener(selectionListener);
-		showAssumeValid.addSelectionListener(selectionListener);
-
+		generalTab.initializeValues(store);
+		textDecorationTab.initializeValues(store);
+		iconDecorationTab.initializeValues(store);
 		setValid(true);
 	}
 
@@ -431,30 +631,9 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 	 * @return whether it operation succeeded
 	 */
 	private boolean performOk(IPreferenceStore store) {
-
-		store.setValue(UIPreferences.DECORATOR_RECOMPUTE_ANCESTORS,
-				recomputeAncestorDecorations.getSelection());
-		store.setValue(UIPreferences.DECORATOR_RECURSIVE_LIMIT,
-				containerRecurseLimit.getSelection());
-
-		store.setValue(UIPreferences.DECORATOR_FILETEXT_DECORATION,
-				fileTextFormat.getText());
-		store.setValue(UIPreferences.DECORATOR_FOLDERTEXT_DECORATION,
-				folderTextFormat.getText());
-		store.setValue(UIPreferences.DECORATOR_PROJECTTEXT_DECORATION,
-				projectTextFormat.getText());
-
-		store.setValue(UIPreferences.DECORATOR_SHOW_TRACKED_ICON, showTracked
-				.getSelection());
-		store.setValue(UIPreferences.DECORATOR_SHOW_UNTRACKED_ICON,
-				showUntracked.getSelection());
-		store.setValue(UIPreferences.DECORATOR_SHOW_STAGED_ICON, showStaged
-				.getSelection());
-		store.setValue(UIPreferences.DECORATOR_SHOW_CONFLICTS_ICON,
-				showConflicts.getSelection());
-		store.setValue(UIPreferences.DECORATOR_SHOW_ASSUME_VALID_ICON,
-				showAssumeValid.getSelection());
-
+		generalTab.performOk(store);
+		textDecorationTab.performOk(store);
+		iconDecorationTab.performOk(store);
 		return true;
 	}
 
@@ -463,37 +642,12 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 	 * default values
 	 */
 	protected void performDefaults() {
-		super.performDefaults();
 		IPreferenceStore store = getPreferenceStore();
-
-		recomputeAncestorDecorations
-				.setSelection(store
-						.getDefaultBoolean(UIPreferences.DECORATOR_RECOMPUTE_ANCESTORS));
-		containerRecurseLimit.setSelection(store
-				.getDefaultInt(UIPreferences.DECORATOR_RECURSIVE_LIMIT));
-
-		fileTextFormat.setText(store
-				.getDefaultString(UIPreferences.DECORATOR_FILETEXT_DECORATION));
-		folderTextFormat
-				.setText(store
-						.getDefaultString(UIPreferences.DECORATOR_FOLDERTEXT_DECORATION));
-		projectTextFormat
-				.setText(store
-						.getDefaultString(UIPreferences.DECORATOR_PROJECTTEXT_DECORATION));
-
-		showTracked.setSelection(store
-				.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_TRACKED_ICON));
-		showUntracked
-				.setSelection(store
-						.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_UNTRACKED_ICON));
-		showStaged.setSelection(store
-				.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_STAGED_ICON));
-		showConflicts
-				.setSelection(store
-						.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_CONFLICTS_ICON));
-		showAssumeValid
-				.setSelection(store
-						.getDefaultBoolean(UIPreferences.DECORATOR_SHOW_ASSUME_VALID_ICON));
+		generalTab.performDefaults(store);
+		textDecorationTab.performDefaults(store);
+		iconDecorationTab.performDefaults(store);
+		super.performDefaults();
+		preview.refresh();
 	}
 
 	/**
@@ -517,140 +671,6 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 		PlatformUI.getWorkbench().getThemeManager()
 				.removePropertyChangeListener(themeListener);
 		super.dispose();
-	}
-
-	/**
-	 * Adds another variable to the given target text
-	 *
-	 * A ListSelectionDialog pops up and allow the user to choose the variable,
-	 * which is then inserted at current position in <code>text</code>
-	 *
-	 * @param target
-	 *            the target to add the variable to
-	 * @param bindings
-	 *            the map of bindings
-	 */
-	private void addVariables(Text target, Map bindings) {
-
-		final List<StringPair> variables = new ArrayList<StringPair>(bindings
-				.size());
-
-		ILabelProvider labelProvider = new LabelProvider() {
-			public String getText(Object element) {
-				return ((StringPair) element).s1
-						+ " - " + ((StringPair) element).s2; //$NON-NLS-1$
-			}
-		};
-
-		IStructuredContentProvider contentsProvider = new IStructuredContentProvider() {
-			public Object[] getElements(Object inputElement) {
-				return variables.toArray(new StringPair[variables.size()]);
-			}
-
-			public void dispose() {
-				// No-op
-			}
-
-			public void inputChanged(Viewer viewer, Object oldInput,
-					Object newInput) {
-				// No-op
-			}
-		};
-
-		for (Iterator it = bindings.keySet().iterator(); it.hasNext();) {
-			StringPair variable = new StringPair();
-			variable.s1 = (String) it.next(); // variable
-			variable.s2 = (String) bindings.get(variable.s1); // description
-			variables.add(variable);
-		}
-
-		ListSelectionDialog dialog = new ListSelectionDialog(this.getShell(),
-				this, contentsProvider, labelProvider,
-				UIText.DecoratorPreferencesPage_selectVariablesToAdd);
-		dialog.setTitle(UIText.DecoratorPreferencesPage_addVariablesTitle);
-		if (dialog.open() != Window.OK)
-			return;
-
-		Object[] result = dialog.getResult();
-
-		for (int i = 0; i < result.length; i++) {
-			target.insert("{" + ((StringPair) result[i]).s1 + "}"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-	}
-
-	class StringPair {
-		String s1;
-
-		String s2;
-	}
-
-	class TextPair {
-		TextPair(Text t1, Text t2) {
-			this.t1 = t1;
-			this.t2 = t2;
-		}
-
-		Text t1;
-
-		Text t2;
-	}
-
-	/**
-	 * Gets the map of bindings between variables and description, to use for
-	 * the format editors for files
-	 *
-	 * @return the bindings
-	 */
-	private Map getFileBindingDescriptions() {
-		Map<String, String> bindings = new HashMap<String, String>();
-		bindings.put(DecorationHelper.BINDING_RESOURCE_NAME,
-				UIText.DecoratorPreferencesPage_bindingResourceName);
-		bindings.put(DecorationHelper.BINDING_DIRTY_FLAG,
-				UIText.DecoratorPreferencesPage_bindingDirtyFlag);
-		bindings.put(DecorationHelper.BINDING_STAGED_FLAG,
-				UIText.DecoratorPreferencesPage_bindingStagedFlag);
-		return bindings;
-	}
-
-	/**
-	 * Gets the map of bindings between variables and description, to use for
-	 * the format editors for folders
-	 *
-	 * @return the bindings
-	 */
-	private Map getFolderBindingDescriptions() {
-		Map<String, String> bindings = new HashMap<String, String>();
-		bindings.put(DecorationHelper.BINDING_RESOURCE_NAME,
-				UIText.DecoratorPreferencesPage_bindingResourceName);
-		bindings.put(DecorationHelper.BINDING_DIRTY_FLAG,
-				UIText.DecoratorPreferencesPage_bindingDirtyFlag);
-		bindings.put(DecorationHelper.BINDING_STAGED_FLAG,
-				UIText.DecoratorPreferencesPage_bindingStagedFlag);
-		return bindings;
-	}
-
-	/**
-	 * Gets the map of bindings between variables and description, to use for
-	 * the format editors for projects
-	 *
-	 * @return the bindings
-	 */
-	private Map getProjectBindingDescriptions() {
-		Map<String, String> bindings = new HashMap<String, String>();
-		bindings.put(DecorationHelper.BINDING_RESOURCE_NAME,
-				UIText.DecoratorPreferencesPage_bindingResourceName);
-		bindings.put(DecorationHelper.BINDING_DIRTY_FLAG,
-				UIText.DecoratorPreferencesPage_bindingDirtyFlag);
-		bindings.put(DecorationHelper.BINDING_STAGED_FLAG,
-				UIText.DecoratorPreferencesPage_bindingStagedFlag);
-		bindings.put(DecorationHelper.BINDING_BRANCH_NAME,
-				UIText.DecoratorPreferencesPage_bindingBranchName);
-		return bindings;
-	}
-
-	private void updatePreview() {
-		if (preview != null)
-			preview.refresh();
 	}
 
 	/**
@@ -886,12 +906,15 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 		}
 
 		public void setBackgroundColor(Color color) {
+			// TODO: Add support for color
 		}
 
 		public void setForegroundColor(Color color) {
+			// TODO: Add support for color
 		}
 
 		public void setFont(Font font) {
+			// TODO: Add support for fonts
 		}
 
 		public ImageDescriptor getOverlay() {
