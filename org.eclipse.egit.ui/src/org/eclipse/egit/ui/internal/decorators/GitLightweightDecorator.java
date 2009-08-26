@@ -31,7 +31,7 @@ import org.eclipse.core.resources.mapping.ResourceMapping;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.egit.core.GitException;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.egit.core.internal.util.ExceptionCollector;
 import org.eclipse.egit.core.project.GitProjectData;
 import org.eclipse.egit.core.project.RepositoryChangeListener;
@@ -173,7 +173,8 @@ public class GitLightweightDecorator extends LabelProvider implements
 			helper.decorate(decoration,
 					new DecoratableResourceAdapter(resource));
 		} catch (IOException e) {
-			handleException(resource, GitException.wrapException(e));
+			handleException(resource, new CoreException(new Status(
+					IStatus.ERROR, Activator.getPluginId(), e.getMessage(), e)));
 		}
 	}
 
