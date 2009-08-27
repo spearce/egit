@@ -433,10 +433,6 @@ public class GitDecoratorPreferencePage extends PreferencePage implements
 				text.addModifyListener(listener);
 			}
 
-			public String getText() {
-				return text.getText();
-			}
-
 			public void widgetSelected(SelectionEvent e) {
 				final ILabelProvider labelProvider = new LabelProvider() {
 					public String getText(Object element) {
