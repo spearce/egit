@@ -31,9 +31,9 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.egit.core.Activator;
 import org.eclipse.egit.core.CoreText;
 import org.eclipse.egit.core.project.RepositoryMapping;
-import org.spearce.jgit.errors.NotSupportedException;
-import org.spearce.jgit.lib.GitIndex;
-import org.spearce.jgit.lib.GitIndex.Entry;
+import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.lib.GitIndex;
+import org.eclipse.jgit.lib.GitIndex.Entry;
 
 /**
  * This job updates the index with the content of all specified

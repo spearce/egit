@@ -9,7 +9,7 @@
 package org.eclipse.egit.ui.internal.actions;
 
 import org.eclipse.egit.ui.internal.history.RevObjectSelectionProvider;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Repository;
 
 abstract class AbstractRevObjectAction extends AbstractOperationAction {
 

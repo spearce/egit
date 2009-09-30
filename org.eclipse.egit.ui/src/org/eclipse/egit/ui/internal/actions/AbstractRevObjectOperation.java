@@ -9,7 +9,7 @@
 package org.eclipse.egit.ui.internal.actions;
 
 import org.eclipse.core.resources.IWorkspaceRunnable;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Repository;
 
 abstract class AbstractRevObjectOperation implements IWorkspaceRunnable {
 

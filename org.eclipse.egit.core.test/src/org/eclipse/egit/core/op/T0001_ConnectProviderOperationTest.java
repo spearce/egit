@@ -23,14 +23,14 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.egit.core.op.ConnectProviderOperation;
 import org.eclipse.egit.core.test.GitTestCase;
 import org.eclipse.team.core.RepositoryProvider;
-import org.spearce.jgit.lib.Commit;
-import org.spearce.jgit.lib.FileTreeEntry;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.ObjectWriter;
-import org.spearce.jgit.lib.PersonIdent;
-import org.spearce.jgit.lib.RefUpdate;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.Tree;
+import org.eclipse.jgit.lib.Commit;
+import org.eclipse.jgit.lib.FileTreeEntry;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.ObjectWriter;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.lib.RefUpdate;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Tree;
 
 public class T0001_ConnectProviderOperationTest extends GitTestCase {
 

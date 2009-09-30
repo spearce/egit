@@ -13,8 +13,8 @@ import java.io.IOException;
 import org.eclipse.egit.ui.Activator;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.spearce.jgit.revwalk.RevCommit;
-import org.spearce.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.treewalk.TreeWalk;
 
 class FileDiffContentProvider implements IStructuredContentProvider {
 	private TreeWalk walk;

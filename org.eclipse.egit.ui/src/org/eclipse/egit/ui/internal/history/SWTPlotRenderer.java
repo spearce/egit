@@ -18,10 +18,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.themes.ColorUtil;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.revplot.AbstractPlotRenderer;
-import org.spearce.jgit.revplot.PlotCommit;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.revplot.AbstractPlotRenderer;
+import org.eclipse.jgit.revplot.PlotCommit;
 
 class SWTPlotRenderer extends AbstractPlotRenderer<SWTLane, Color> {
 	private final Color sys_blue;

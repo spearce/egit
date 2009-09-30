@@ -36,9 +36,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.spearce.jgit.transport.RemoteConfig;
-import org.spearce.jgit.transport.URIish;
-import org.spearce.jgit.util.FS;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.util.FS;
 
 /**
  * Wizard page that allows the user entering the location of a remote repository

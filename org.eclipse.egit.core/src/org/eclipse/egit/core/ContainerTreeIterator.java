@@ -19,14 +19,14 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.egit.core.project.RepositoryMapping;
-import org.spearce.jgit.errors.IncorrectObjectTypeException;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.FileMode;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.treewalk.AbstractTreeIterator;
-import org.spearce.jgit.treewalk.WorkingTreeIterator;
-import org.spearce.jgit.util.FS;
+import org.eclipse.jgit.errors.IncorrectObjectTypeException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.FileMode;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.treewalk.AbstractTreeIterator;
+import org.eclipse.jgit.treewalk.WorkingTreeIterator;
+import org.eclipse.jgit.util.FS;
 
 /**
  * Adapts an Eclipse {@link IContainer} for use in a <code>TreeWalk</code>.
@@ -42,7 +42,7 @@ import org.spearce.jgit.util.FS;
  * place. This is not really a concern as it is common practice to need to do a
  * workspace refresh after externally modifying a file.
  *
- * @see org.spearce.jgit.treewalk.TreeWalk
+ * @see org.eclipse.jgit.treewalk.TreeWalk
  */
 public class ContainerTreeIterator extends WorkingTreeIterator {
 	private static String computePrefix(final IContainer base) {

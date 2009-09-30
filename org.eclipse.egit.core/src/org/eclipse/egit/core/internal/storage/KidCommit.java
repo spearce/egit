@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.egit.core.internal.storage;
 
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.revwalk.RevCommit;
 
 class KidCommit extends RevCommit {
 	static final KidCommit[] NO_CHILDREN = {};

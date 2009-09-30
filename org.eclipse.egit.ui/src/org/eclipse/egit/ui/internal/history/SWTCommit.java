@@ -9,9 +9,9 @@
 package org.eclipse.egit.ui.internal.history;
 
 import org.eclipse.swt.widgets.Widget;
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.revplot.PlotCommit;
-import org.spearce.jgit.lib.Ref;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.revplot.PlotCommit;
+import org.eclipse.jgit.lib.Ref;
 
 class SWTCommit extends PlotCommit<SWTCommitList.SWTLane> {
 	Widget widget;

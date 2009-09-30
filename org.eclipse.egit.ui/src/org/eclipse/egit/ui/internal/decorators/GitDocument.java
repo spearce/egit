@@ -21,17 +21,17 @@ import org.eclipse.egit.core.project.RepositoryMapping;
 import org.eclipse.egit.ui.Activator;
 import org.eclipse.jface.text.Document;
 import org.eclipse.team.core.RepositoryProvider;
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.lib.Commit;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.IndexChangedEvent;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.ObjectLoader;
-import org.spearce.jgit.lib.RefsChangedEvent;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.RepositoryListener;
-import org.spearce.jgit.lib.Tree;
-import org.spearce.jgit.lib.TreeEntry;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.lib.Commit;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.IndexChangedEvent;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.ObjectLoader;
+import org.eclipse.jgit.lib.RefsChangedEvent;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryListener;
+import org.eclipse.jgit.lib.Tree;
+import org.eclipse.jgit.lib.TreeEntry;
 
 class GitDocument extends Document implements RepositoryListener {
 	private final IResource resource;

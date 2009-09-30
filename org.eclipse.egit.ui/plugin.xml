@@ -118,7 +118,7 @@
 	  </objectContribution>
 	  <objectContribution
          id="org.eclipse.egit.ui.resetto"
-         objectClass="org.spearce.jgit.revwalk.RevCommit">
+         objectClass="org.eclipse.jgit.revwalk.RevCommit">
          <action
                class="org.eclipse.egit.ui.internal.actions.SoftResetToRevisionAction"
                id="org.eclipse.egit.ui.softresettorevision"

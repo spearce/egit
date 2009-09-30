@@ -9,9 +9,9 @@
 package org.eclipse.egit.ui.internal.push;
 
 import org.eclipse.egit.core.op.PushOperationResult;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.transport.RemoteRefUpdate;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Data class representing row (element) of table with push results.

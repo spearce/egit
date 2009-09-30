@@ -25,10 +25,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.egit.core.project.GitProjectData;
 import org.eclipse.egit.core.project.RepositoryMapping;
-import org.spearce.jgit.dircache.DirCache;
-import org.spearce.jgit.dircache.DirCacheBuilder;
-import org.spearce.jgit.dircache.DirCacheEditor;
-import org.spearce.jgit.dircache.DirCacheEntry;
+import org.eclipse.jgit.dircache.DirCache;
+import org.eclipse.jgit.dircache.DirCacheBuilder;
+import org.eclipse.jgit.dircache.DirCacheEditor;
+import org.eclipse.jgit.dircache.DirCacheEntry;
 
 class GitMoveDeleteHook implements IMoveDeleteHook {
 	private static final boolean I_AM_DONE = true;

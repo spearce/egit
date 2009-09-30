@@ -40,11 +40,11 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.themes.ITheme;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.spearce.jgit.lib.IndexChangedEvent;
-import org.spearce.jgit.lib.RefsChangedEvent;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.RepositoryListener;
-import org.spearce.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.lib.IndexChangedEvent;
+import org.eclipse.jgit.lib.RefsChangedEvent;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryListener;
+import org.eclipse.jgit.transport.SshSessionFactory;
 
 /**
  * This is a plugin singleton mostly controlling logging.

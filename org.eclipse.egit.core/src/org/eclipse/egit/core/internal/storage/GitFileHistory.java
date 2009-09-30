@@ -20,13 +20,13 @@ import org.eclipse.egit.core.project.RepositoryMapping;
 import org.eclipse.team.core.history.IFileHistoryProvider;
 import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.core.history.provider.FileHistory;
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.revwalk.RevCommit;
-import org.spearce.jgit.treewalk.filter.AndTreeFilter;
-import org.spearce.jgit.treewalk.filter.PathFilterGroup;
-import org.spearce.jgit.treewalk.filter.TreeFilter;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.treewalk.filter.AndTreeFilter;
+import org.eclipse.jgit.treewalk.filter.PathFilterGroup;
+import org.eclipse.jgit.treewalk.filter.TreeFilter;
 
 /**
  * A list of revisions for a specific resource according to some filtering

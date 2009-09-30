@@ -10,7 +10,7 @@ package org.eclipse.egit.core;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.spearce.jgit.lib.ProgressMonitor;
+import org.eclipse.jgit.lib.ProgressMonitor;
 
 /** Create a new Git to Eclipse progress monitor. */
 public class EclipseGitProgressTransformer implements ProgressMonitor {

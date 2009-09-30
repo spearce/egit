@@ -19,11 +19,11 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.spearce.jgit.errors.IncorrectObjectTypeException;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.ObjectLoader;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.errors.IncorrectObjectTypeException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.ObjectLoader;
+import org.eclipse.jgit.lib.Repository;
 
 /** Accesses a blob from Git. */
 class BlobStorage implements IStorage {

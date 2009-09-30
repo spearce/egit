@@ -34,11 +34,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.transport.RefSpec;
-import org.spearce.jgit.transport.RemoteRefUpdate;
-import org.spearce.jgit.transport.Transport;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.RefSpec;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.URIish;
 
 class ConfirmationPage extends WizardPage {
 	static Collection<RemoteRefUpdate> copyUpdates(

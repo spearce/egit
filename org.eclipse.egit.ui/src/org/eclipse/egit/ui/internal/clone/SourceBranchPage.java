@@ -40,10 +40,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.URIish;
 
 class SourceBranchPage extends BaseWizardPage {
 	private final RepositorySelectionPage sourcePage;

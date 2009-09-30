@@ -13,7 +13,7 @@ import java.util.List;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.egit.core.op.ResetOperation;
 import org.eclipse.jface.action.IAction;
-import org.spearce.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.lib.AnyObjectId;
 
 /**
  * Soft reset to selected revision

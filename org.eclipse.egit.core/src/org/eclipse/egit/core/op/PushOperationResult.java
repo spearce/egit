@@ -15,11 +15,11 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.transport.PushResult;
-import org.spearce.jgit.transport.RemoteRefUpdate;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.transport.PushResult;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Data class for storing push operation results for each remote repository/URI

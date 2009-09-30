@@ -27,9 +27,9 @@ import org.eclipse.egit.core.Activator;
 import org.eclipse.egit.core.CoreText;
 import org.eclipse.egit.core.project.GitProjectData;
 import org.eclipse.egit.core.project.RepositoryMapping;
-import org.spearce.jgit.dircache.DirCache;
-import org.spearce.jgit.dircache.DirCacheEntry;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.dircache.DirCache;
+import org.eclipse.jgit.dircache.DirCacheEntry;
+import org.eclipse.jgit.lib.Repository;
 
 /**
  * Tell JGit to ignore changes in selected files

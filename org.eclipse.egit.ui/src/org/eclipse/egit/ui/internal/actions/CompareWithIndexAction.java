@@ -26,8 +26,8 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.internal.ui.Utils;
 import org.eclipse.team.ui.synchronize.SaveableCompareEditorInput;
-import org.spearce.jgit.lib.GitIndex;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.lib.GitIndex;
+import org.eclipse.jgit.lib.Repository;
 
 /**
  * The "compare with index" action. This action opens a diff editor comparing

@@ -19,10 +19,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.team.core.history.IFileRevision;
-import org.spearce.jgit.lib.GitIndex;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.GitIndex.Entry;
+import org.eclipse.jgit.lib.GitIndex;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.GitIndex.Entry;
 
 /** An {@link IFileRevision} for the version in the Git index. */
 class IndexFileRevision extends GitFileRevision implements IFileRevision {

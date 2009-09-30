@@ -31,14 +31,14 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.spearce.jgit.errors.NotSupportedException;
-import org.spearce.jgit.errors.TransportException;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.RepositoryConfig;
-import org.spearce.jgit.transport.FetchResult;
-import org.spearce.jgit.transport.RefSpec;
-import org.spearce.jgit.transport.RemoteConfig;
-import org.spearce.jgit.transport.Transport;
+import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.TransportException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryConfig;
+import org.eclipse.jgit.transport.FetchResult;
+import org.eclipse.jgit.transport.RefSpec;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.Transport;
 
 /**
  * Wizard allowing user to specify all needed data to fetch from another

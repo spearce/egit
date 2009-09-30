@@ -34,13 +34,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.transport.RemoteRefUpdate;
-import org.spearce.jgit.transport.URIish;
-import org.spearce.jgit.transport.RemoteRefUpdate.Status;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 
 /**
  * Table displaying push operation results.

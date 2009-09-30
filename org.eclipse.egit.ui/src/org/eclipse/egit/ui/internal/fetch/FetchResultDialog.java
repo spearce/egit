@@ -18,8 +18,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.transport.FetchResult;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.FetchResult;
 
 /**
  * Dialog displaying result of fetch operation.

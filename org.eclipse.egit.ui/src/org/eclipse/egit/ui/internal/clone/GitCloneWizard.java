@@ -32,8 +32,8 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Import Git Repository Wizard. A front end to a git clone operation.

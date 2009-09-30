@@ -46,7 +46,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
-import org.spearce.jgit.revwalk.RevFlag;
+import org.eclipse.jgit.revwalk.RevFlag;
 
 /**
  * A toolbar for the history page.

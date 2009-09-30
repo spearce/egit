@@ -16,13 +16,13 @@ import java.util.Map;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.egit.core.CoreText;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.spearce.jgit.errors.NotSupportedException;
-import org.spearce.jgit.errors.TransportException;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.transport.Connection;
-import org.spearce.jgit.transport.Transport;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.TransportException;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.Connection;
+import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Operation of listing remote repository advertised refs.

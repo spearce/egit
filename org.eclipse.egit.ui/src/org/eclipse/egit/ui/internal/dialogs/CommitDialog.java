@@ -67,14 +67,14 @@ import org.eclipse.team.core.history.IFileHistoryProvider;
 import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.internal.ui.history.FileRevisionTypedElement;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.spearce.jgit.lib.Commit;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.GitIndex;
-import org.spearce.jgit.lib.PersonIdent;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.Tree;
-import org.spearce.jgit.lib.TreeEntry;
-import org.spearce.jgit.lib.GitIndex.Entry;
+import org.eclipse.jgit.lib.Commit;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.GitIndex;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Tree;
+import org.eclipse.jgit.lib.TreeEntry;
+import org.eclipse.jgit.lib.GitIndex.Entry;
 
 /**
  * Dialog is shown to user when they request to commit files. Changes in the

@@ -35,8 +35,8 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Ref;
 
 /**
  * Wizard page that allows the user entering the location of a repository to be

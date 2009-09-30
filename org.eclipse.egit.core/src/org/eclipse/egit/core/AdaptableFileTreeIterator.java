@@ -15,10 +15,10 @@ import java.io.IOException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.Path;
-import org.spearce.jgit.errors.IncorrectObjectTypeException;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.treewalk.AbstractTreeIterator;
-import org.spearce.jgit.treewalk.FileTreeIterator;
+import org.eclipse.jgit.errors.IncorrectObjectTypeException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.treewalk.AbstractTreeIterator;
+import org.eclipse.jgit.treewalk.FileTreeIterator;
 
 /**
  * Java IO file tree iterator that can adapt to a {@link ContainerTreeIterator}
@@ -26,7 +26,7 @@ import org.spearce.jgit.treewalk.FileTreeIterator;
  * The iterator automatically adapts to a {@link ContainerTreeIterator} when
  * recursing into directories that are accessible from the given workspace root.
  *
- * @see org.spearce.jgit.treewalk.FileTreeIterator
+ * @see org.eclipse.jgit.treewalk.FileTreeIterator
  * @see org.eclipse.egit.core.ContainerTreeIterator
  */
 public class AdaptableFileTreeIterator extends FileTreeIterator {

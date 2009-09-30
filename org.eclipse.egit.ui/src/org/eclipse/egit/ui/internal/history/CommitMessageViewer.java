@@ -33,9 +33,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.spearce.jgit.lib.PersonIdent;
-import org.spearce.jgit.revplot.PlotCommit;
-import org.spearce.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.revplot.PlotCommit;
+import org.eclipse.jgit.revwalk.RevCommit;
 
 class CommitMessageViewer extends TextViewer {
 	private final ListenerList navListeners = new ListenerList();

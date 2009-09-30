@@ -27,9 +27,9 @@ import org.eclipse.egit.core.Activator;
 import org.eclipse.egit.core.CoreText;
 import org.eclipse.egit.core.project.GitProjectData;
 import org.eclipse.egit.core.project.RepositoryMapping;
-import org.spearce.jgit.dircache.DirCache;
-import org.spearce.jgit.dircache.DirCacheEditor;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.dircache.DirCache;
+import org.eclipse.jgit.dircache.DirCacheEditor;
+import org.eclipse.jgit.lib.Repository;
 
 /**
  * Remove one or more existing files/folders from the Git repository.

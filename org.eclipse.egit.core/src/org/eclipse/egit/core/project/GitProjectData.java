@@ -41,9 +41,9 @@ import org.eclipse.egit.core.GitCorePreferences;
 import org.eclipse.egit.core.GitProvider;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.team.core.RepositoryProvider;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.WindowCache;
-import org.spearce.jgit.lib.WindowCacheConfig;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.WindowCache;
+import org.eclipse.jgit.lib.WindowCacheConfig;
 
 /**
  * This class keeps information about how a project is mapped to

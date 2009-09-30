@@ -9,7 +9,7 @@
  *******************************************************************************/
 package org.eclipse.egit.core.internal.storage;
 
-import org.spearce.jgit.revwalk.RevCommitList;
+import org.eclipse.jgit.revwalk.RevCommitList;
 
 class KidCommitList extends RevCommitList<KidCommit> {
 	@Override

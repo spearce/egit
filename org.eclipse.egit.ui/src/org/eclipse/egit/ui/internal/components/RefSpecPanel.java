@@ -76,15 +76,15 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.fieldassist.ContentAssistCommandAdapter;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.Ref.Storage;
-import org.spearce.jgit.transport.FetchConnection;
-import org.spearce.jgit.transport.RefSpec;
-import org.spearce.jgit.transport.RemoteConfig;
-import org.spearce.jgit.transport.Transport;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Ref.Storage;
+import org.eclipse.jgit.transport.FetchConnection;
+import org.eclipse.jgit.transport.RefSpec;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.Transport;
 
 /**
  * This class provides universal panel for editing list of {@link RefSpec} -

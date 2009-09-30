@@ -36,9 +36,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.internal.ui.history.FileRevisionTypedElement;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.revwalk.RevCommit;
-import org.spearce.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.treewalk.TreeWalk;
 
 class CommitFileDiffViewer extends TableViewer {
 	private TreeWalk walker;

@@ -10,8 +10,8 @@ package org.eclipse.egit.ui.internal.fetch;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.spearce.jgit.transport.FetchResult;
-import org.spearce.jgit.transport.TrackingRefUpdate;
+import org.eclipse.jgit.transport.FetchResult;
+import org.eclipse.jgit.transport.TrackingRefUpdate;
 
 /**
  * Content provided for fetch result table viewer.

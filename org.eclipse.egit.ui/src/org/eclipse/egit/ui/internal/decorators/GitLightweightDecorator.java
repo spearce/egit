@@ -57,11 +57,11 @@ import org.eclipse.team.ui.TeamImages;
 import org.eclipse.team.ui.TeamUI;
 import org.eclipse.ui.IContributorResourceAdapter;
 import org.eclipse.ui.PlatformUI;
-import org.spearce.jgit.lib.IndexChangedEvent;
-import org.spearce.jgit.lib.RefsChangedEvent;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.RepositoryChangedEvent;
-import org.spearce.jgit.lib.RepositoryListener;
+import org.eclipse.jgit.lib.IndexChangedEvent;
+import org.eclipse.jgit.lib.RefsChangedEvent;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryChangedEvent;
+import org.eclipse.jgit.lib.RepositoryListener;
 
 /**
  * Supplies annotations for displayed resources
@@ -571,7 +571,7 @@ public class GitLightweightDecorator extends LabelProvider implements
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * org.spearce.jgit.lib.RepositoryListener#indexChanged(org.spearce.jgit
+	 * org.eclipse.jgit.lib.RepositoryListener#indexChanged(org.eclipse.jgit
 	 * .lib.IndexChangedEvent)
 	 */
 	public void indexChanged(IndexChangedEvent e) {
@@ -582,7 +582,7 @@ public class GitLightweightDecorator extends LabelProvider implements
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * org.spearce.jgit.lib.RepositoryListener#refsChanged(org.spearce.jgit.
+	 * org.eclipse.jgit.lib.RepositoryListener#refsChanged(org.eclipse.jgit.
 	 * lib.RefsChangedEvent)
 	 */
 	public void refsChanged(RefsChangedEvent e) {

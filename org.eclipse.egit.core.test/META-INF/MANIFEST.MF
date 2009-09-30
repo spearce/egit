@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.junit,
  org.eclipse.egit.core,
  org.eclipse.egit.ui,
- org.spearce.jgit,
+ org.eclipse.jgit,
  org.eclipse.core.filesystem
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.core.resources,

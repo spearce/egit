@@ -17,14 +17,14 @@ import org.eclipse.egit.core.CoreText;
 import org.eclipse.egit.core.EclipseGitProgressTransformer;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.osgi.util.NLS;
-import org.spearce.jgit.errors.NoRemoteRepositoryException;
-import org.spearce.jgit.errors.NotSupportedException;
-import org.spearce.jgit.errors.TransportException;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.transport.PushResult;
-import org.spearce.jgit.transport.RemoteConfig;
-import org.spearce.jgit.transport.Transport;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.errors.NoRemoteRepositoryException;
+import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.TransportException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.PushResult;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Push operation: pushing from local repository to one or many remote ones.

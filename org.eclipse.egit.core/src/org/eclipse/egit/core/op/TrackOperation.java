@@ -29,8 +29,8 @@ import org.eclipse.egit.core.Activator;
 import org.eclipse.egit.core.CoreText;
 import org.eclipse.egit.core.project.RepositoryMapping;
 import org.eclipse.team.core.Team;
-import org.spearce.jgit.lib.GitIndex;
-import org.spearce.jgit.lib.GitIndex.Entry;
+import org.eclipse.jgit.lib.GitIndex;
+import org.eclipse.jgit.lib.GitIndex.Entry;
 
 /**
  * Add one or more new files/folders to the Git repository.

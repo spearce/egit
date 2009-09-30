@@ -23,8 +23,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.PropertyPage;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Repository;
 
 /**
  * Property page to be shown in project properties, if project is shared using

@@ -15,8 +15,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.spearce.jgit.revwalk.RevFlag;
-import org.spearce.jgit.revwalk.RevObject;
+import org.eclipse.jgit.revwalk.RevFlag;
+import org.eclipse.jgit.revwalk.RevObject;
 
 /**
  * Results for the find toolbar. This object stores the rows in the history

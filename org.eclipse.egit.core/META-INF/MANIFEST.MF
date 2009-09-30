@@ -9,7 +9,7 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.team.core,
  org.eclipse.core.resources,
- org.spearce.jgit,
+ org.eclipse.jgit,
  org.eclipse.core.filesystem,
  org.eclipse.ui
 Export-Package: org.eclipse.egit.core,

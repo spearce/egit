@@ -20,14 +20,14 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.team.core.TeamException;
-import org.spearce.jgit.errors.CheckoutConflictException;
-import org.spearce.jgit.lib.Commit;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.GitIndex;
-import org.spearce.jgit.lib.RefLogWriter;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.Tree;
-import org.spearce.jgit.lib.WorkDirCheckout;
+import org.eclipse.jgit.errors.CheckoutConflictException;
+import org.eclipse.jgit.lib.Commit;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.GitIndex;
+import org.eclipse.jgit.lib.RefLogWriter;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Tree;
+import org.eclipse.jgit.lib.WorkDirCheckout;
 
 /**
  * This class implements checkouts of a specific revision. A check

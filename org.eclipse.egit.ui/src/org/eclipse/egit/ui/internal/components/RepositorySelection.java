@@ -12,8 +12,8 @@ package org.eclipse.egit.ui.internal.components;
 import java.util.Collections;
 import java.util.List;
 
-import org.spearce.jgit.transport.RemoteConfig;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Data class representing selection of remote repository made by user.

@@ -9,10 +9,10 @@
  *******************************************************************************/
 package org.eclipse.egit.core.internal.storage;
 
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.revwalk.RevCommit;
-import org.spearce.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 
 class KidWalk extends RevWalk {
 	KidWalk(final Repository repo) {

@@ -12,8 +12,8 @@ package org.eclipse.egit.ui;
 
 import org.eclipse.jsch.core.IJSchService;
 import org.eclipse.jsch.ui.UserInfoPrompter;
-import org.spearce.jgit.transport.OpenSshConfig;
-import org.spearce.jgit.transport.SshConfigSessionFactory;
+import org.eclipse.jgit.transport.OpenSshConfig;
+import org.eclipse.jgit.transport.SshConfigSessionFactory;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;

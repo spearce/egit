@@ -23,13 +23,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.egit.core.GitTag;
 import org.eclipse.team.core.history.IFileRevision;
 import org.eclipse.team.core.history.ITag;
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.PersonIdent;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.revwalk.RevCommit;
-import org.spearce.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.treewalk.TreeWalk;
 
 /**
  * An {@link IFileRevision} for a version of a specified resource in the

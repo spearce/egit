@@ -15,8 +15,8 @@ import java.util.Map.Entry;
 import org.eclipse.egit.core.op.PushOperationResult;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.spearce.jgit.transport.RemoteRefUpdate;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Content provided for push result table viewer.

@@ -30,22 +30,22 @@ import org.eclipse.egit.ui.Activator;
 import org.eclipse.egit.ui.UIPreferences;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.team.core.Team;
-import org.spearce.jgit.dircache.DirCache;
-import org.spearce.jgit.dircache.DirCacheEntry;
-import org.spearce.jgit.dircache.DirCacheIterator;
-import org.spearce.jgit.errors.IncorrectObjectTypeException;
-import org.spearce.jgit.errors.MissingObjectException;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.FileMode;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.revwalk.RevWalk;
-import org.spearce.jgit.treewalk.EmptyTreeIterator;
-import org.spearce.jgit.treewalk.TreeWalk;
-import org.spearce.jgit.treewalk.WorkingTreeIterator;
-import org.spearce.jgit.treewalk.filter.AndTreeFilter;
-import org.spearce.jgit.treewalk.filter.PathFilterGroup;
-import org.spearce.jgit.treewalk.filter.TreeFilter;
+import org.eclipse.jgit.dircache.DirCache;
+import org.eclipse.jgit.dircache.DirCacheEntry;
+import org.eclipse.jgit.dircache.DirCacheIterator;
+import org.eclipse.jgit.errors.IncorrectObjectTypeException;
+import org.eclipse.jgit.errors.MissingObjectException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.FileMode;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.treewalk.EmptyTreeIterator;
+import org.eclipse.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.treewalk.WorkingTreeIterator;
+import org.eclipse.jgit.treewalk.filter.AndTreeFilter;
+import org.eclipse.jgit.treewalk.filter.PathFilterGroup;
+import org.eclipse.jgit.treewalk.filter.TreeFilter;
 
 class DecoratableResourceAdapter implements IDecoratableResource {
 

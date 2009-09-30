@@ -20,7 +20,7 @@ import org.eclipse.egit.core.project.RepositoryMapping;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.team.internal.ui.actions.TeamAction;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Repository;
 
 /**
  * A helper class for Team Actions on Git controlled projects

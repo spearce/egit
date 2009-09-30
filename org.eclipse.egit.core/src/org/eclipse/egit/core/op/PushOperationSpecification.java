@@ -13,8 +13,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import org.spearce.jgit.transport.RemoteRefUpdate;
-import org.spearce.jgit.transport.URIish;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
 
 /**
  * Data class storing push operation update specifications for each remote

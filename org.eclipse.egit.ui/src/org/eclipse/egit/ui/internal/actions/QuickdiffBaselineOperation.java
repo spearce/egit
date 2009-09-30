@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.egit.ui.Activator;
 import org.eclipse.egit.ui.internal.decorators.GitQuickDiffProvider;
-import org.spearce.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Repository;
 
 /**
  * UI operation to change the git quickdiff baseline

@@ -13,14 +13,14 @@ import java.sql.Blob;
 
 import org.eclipse.egit.ui.Activator;
 import org.eclipse.jface.fieldassist.IContentProposal;
-import org.spearce.jgit.lib.Commit;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.ObjectId;
-import org.spearce.jgit.lib.PersonIdent;
-import org.spearce.jgit.lib.Ref;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.Tag;
-import org.spearce.jgit.lib.Tree;
+import org.eclipse.jgit.lib.Commit;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.Tag;
+import org.eclipse.jgit.lib.Tree;
 
 /**
  * Content proposal class for refs names, specifically Ref objects - name with

@@ -61,21 +61,21 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.progress.IWorkbenchSiteProgressService;
-import org.spearce.jgit.lib.AnyObjectId;
-import org.spearce.jgit.lib.Constants;
-import org.spearce.jgit.lib.IndexChangedEvent;
-import org.spearce.jgit.lib.RefsChangedEvent;
-import org.spearce.jgit.lib.Repository;
-import org.spearce.jgit.lib.RepositoryListener;
-import org.spearce.jgit.revplot.PlotCommit;
-import org.spearce.jgit.revwalk.RevCommit;
-import org.spearce.jgit.revwalk.RevFlag;
-import org.spearce.jgit.revwalk.RevSort;
-import org.spearce.jgit.revwalk.filter.RevFilter;
-import org.spearce.jgit.treewalk.TreeWalk;
-import org.spearce.jgit.treewalk.filter.AndTreeFilter;
-import org.spearce.jgit.treewalk.filter.PathFilterGroup;
-import org.spearce.jgit.treewalk.filter.TreeFilter;
+import org.eclipse.jgit.lib.AnyObjectId;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.IndexChangedEvent;
+import org.eclipse.jgit.lib.RefsChangedEvent;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryListener;
+import org.eclipse.jgit.revplot.PlotCommit;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevFlag;
+import org.eclipse.jgit.revwalk.RevSort;
+import org.eclipse.jgit.revwalk.filter.RevFilter;
+import org.eclipse.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.treewalk.filter.AndTreeFilter;
+import org.eclipse.jgit.treewalk.filter.PathFilterGroup;
+import org.eclipse.jgit.treewalk.filter.TreeFilter;
 
 /** Graphical commit history viewer. */
 public class GitHistoryPage extends HistoryPage implements RepositoryListener {
